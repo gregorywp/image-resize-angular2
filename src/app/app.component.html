@@ -1,0 +1,35 @@
+<div class="row">
+  <h1>Image Uploader and Resizer</h1>
+  <form>
+    <fieldset>
+        <label>Upload an Image</label>
+        <br>
+        <input type="file" 
+          ngFileSelect
+          [options]="uploadOptions" 
+          (onUpload)="handleUpload($event)"
+          >
+    </fieldset>
+  </form>
+  <div *ngIf="filename">
+    <h6 *ngIf="originalWidth&&originalHeight">Original Image: {{originalWidth}} X {{originalHeight}}</h6>
+    <h6>Resize To:</h6>
+    <div class="row">
+      <div class="large-4 columns">
+        <label>New Width:
+          <input type="number" [(ngModel)]="newWidth"/>
+        </label>
+      </div>
+      <div class="large-4 columns">
+        <label>New Height
+          <input type="number" [(ngModel)]="newHeight"/>
+        </label>
+      </div>
+      <div class="large-4 columns">
+       <button class="button positive" (click)="resize()">Resize</button>
+      </div>
+    </div>
+    <img *ngIf="resizedImage==''" src="http://dev.gregoryprill.com/uploads/{{filename}}" id="original">
+    <img *ngIf="resizedImage" src="{{resizedImage}}" id="resized">
+  </div>
+</div>
